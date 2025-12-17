@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шифратор ENIGMA</title>
+    <style>
+        * {
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1e1e2f, #2c2c44);
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+form {
+    background: #1f1f33;
+    padding: 30px 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+    color: #f1f1f1;
+}
+
+label {
+    font-size: 14px;
+    color: #cfcfe6;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: #2b2b45;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+input::placeholder {
+    color: #8b8bb3;
+}
+
+input:focus {
+    background: #34345a;
+    box-shadow: 0 0 0 2px #5c5cff;
+}
+
+button {
+    width: 48%;
+    padding: 12px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+button[value="encrypt"] {
+    background: #4caf50;
+    color: #ffffff;
+}
+
+button[value="encrypt"]:hover {
+    background: #43a047;
+}
+
+button[value="decrypt"] {
+    background: #2196f3;
+    color: #ffffff;
+    float: right;
+}
+
+button[value="decrypt"]:hover {
+    background: #1e88e5;
+}
+
+ul {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+li {
+    background: #2b2b45;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    color: #ffeb3b;
+    font-size: 14px;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Шифратор ENIGMA</h1>
+    <form method="POST" action="/process">
+        <label for="message">Сообщение:</label><br>
+        <input type="text" id="message" name="message" required><br><br>
+        
+        <label for="rotor_order">Порядок роторов:</label><br>
+        <input type="text" id="rotor_order" name="rotor_order" required><br><br>
+        
+        <label for="rotor1">Номер для ротора 1:</label><br>
+        <input type="number" id="rotor1" name="rotor1" required><br><br>
+        
+        <label for="rotor2">Номер для ротора 2:</label><br>
+        <input type="number" id="rotor2" name="rotor2" required><br><br>
+        
+        <label for="rotor3">Номер для ротора 3:</label><br>
+        <input type="number" id="rotor3" name="rotor3" required><br><br>
+        
+        <label for="plugboard">Коммутационная панель:</label><br>
+        <input type="text" id="plugboard" name="plugboard" value=""><br><br>
+        
+        <button type="submit" name="action" value="encrypt">Шифровать</button>
+        <button type="submit" name="action" value="decrypt">Дешифровать</button>
+    </form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
+</body>
+</html>
